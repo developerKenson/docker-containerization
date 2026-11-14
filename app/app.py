@@ -5,15 +5,19 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Congratulations! My first Docker application is running on AWS CloudShell!"
+    return "Congratulations! My first Docker application is running on AWS EC2!"
 
 @app.route("/info")
 def info():
     return {
         "application": "Docker Web Application",
         "environment": os.getenv("APP_ENV", "development"),
-        "platform": "AWS CloudShell"
+        "platform": "AWS EC2"
     }
+
+@app.route("/health")
+def health():
+    return {"status": "healthy"}, 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
